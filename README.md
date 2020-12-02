@@ -5,5 +5,5 @@ This module is reponsible for providing basic RSS / Atom feed aggregation for [F
 
 ## Credits
  
-- [Kanna](https://github.com/binarybirds/UAParserSwift) library.
+- [Kanna](https://github.com/tid-kijyun/Kanna) library.
 
