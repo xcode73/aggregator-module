@@ -1,0 +1,28 @@
+#define(toolbarRightBefore):
+    <a href="#($req.url.path)items">#svg("rss")</a>
+#enddefine
+#define(fields):
+    #var(field = nil)
+
+    #(field = ["id": "image", "class": "circular", "data": fields.image, "required": true, "accept": "image/jpeg"])
+    #inline("Admin/Fields/File")
+
+    #(field = ["id": "title", "required": true, "data": fields.title])
+    #inline("Admin/Fields/Text")
+    
+    #(field = ["id": "url", "required": true, "data": fields.url])
+    #inline("Admin/Fields/Text")
+
+#enddefine
+
+#let(form = [
+    "list": "feeds",
+    "id": formId,
+    "token": formToken,
+    "modelId": fields.modelId,
+    "key": "feed",
+    "multipart": true
+])
+#inline("Admin/Form")
+
+
