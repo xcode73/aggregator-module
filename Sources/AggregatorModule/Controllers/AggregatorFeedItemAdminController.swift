@@ -18,7 +18,7 @@ struct AggregatorFeedItemAdminController: ListViewController {
     var idParamKey: String { "itemId" }
     var idPathComponent: PathComponent { .init(stringLiteral: ":" + idParamKey) }
     
-    func search(using qb: QueryBuilder<Model>, for searchTerm: String) {
+    func searchList(using qb: QueryBuilder<Model>, for searchTerm: String) {
         qb.filter(\.$title ~~ searchTerm)
     }
     
