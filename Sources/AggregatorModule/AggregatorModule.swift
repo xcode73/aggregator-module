@@ -26,9 +26,11 @@ final class AggregatorModule: ViperModule {
 
     func boot(_ app: Application) throws {
         /// install
-        app.hooks.register("installer", use: installerHook)
-        app.hooks.register("main-menu-install", use: mainMenuInstallHook)
-        app.hooks.register("static-page-install", use: staticPageInstallHook)
+        app.hooks.register("model-install", use: modelInstallHook)
+        app.hooks.register("user-permission-install", use: userPermissionInstallHook)
+        app.hooks.register("system-variables-install", use: systemVariablesInstallHook)
+        app.hooks.register("frontend-main-menu-install", use: frontendMainMenuInstallHook)
+        app.hooks.register("frontend-page-install", use: frontendPageInstallHook)
 
         /// admin
         app.hooks.register("admin", use: (router as! AggregatorRouter).adminRoutesHook)
@@ -40,27 +42,8 @@ final class AggregatorModule: ViperModule {
     
     // MARK: - hooks
     
-    func installerHook(args: HookArguments) -> ViperInstaller {
-        AggregatorInstaller()
-    }
-    
-    func mainMenuInstallHook(args: HookArguments) -> [[String:Any]] {
-        [
-            [
-                "label": "Aggregator",
-                "url": "/aggregator/",
-            ],
-        ]
-    }
 
-    func staticPageInstallHook(args: HookArguments) -> [[String:Any]] {
-        [
-            [
-                "title": "Aggregator",
-                "content": "[aggregator-page]",
-            ],
-        ]
-    }
+  
     
     func leafAdminMenuHook(args: HookArguments) -> LeafDataRepresentable {
         [
@@ -78,7 +61,7 @@ final class AggregatorModule: ViperModule {
     /// renders the [aggregator-page] content
     func aggregatorPageHook(args: HookArguments) -> EventLoopFuture<Response?> {
         let req = args["req"] as! Request
-        let metadata = args["page-metadata"] as! FrontendMetadata
+        let metadata = args["page-metadata"] as! Metadata
         let formatter = DateFormatter()
         formatter.dateFormat = "y/MM/dd"
 

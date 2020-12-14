@@ -1,5 +1,20 @@
+#let(form = [
+    "id": formId,
+    "token": formToken,
+    "title": "Feed",
+    "key": "aggregator.feeds",
+    "multipart": true,
+    "modelId": modelId,
+    "list": [
+        "title": "Feeds",
+        "url": "/admin/aggregator/feeds/"
+    ]
+])
+
 #define(toolbarRightBefore):
-    <a href="#($req.url.path)items">#svg("rss")</a>
+    #if(modelId != nil):
+    <a href="/admin/aggregator/feeds/#(modelId)/items/">#svg("rss")</a>
+    #endif
 #enddefine
 #define(fields):
     #var(field = nil)
@@ -15,14 +30,6 @@
 
 #enddefine
 
-#let(form = [
-    "list": "feeds",
-    "id": formId,
-    "token": formToken,
-    "modelId": fields.modelId,
-    "key": "feed",
-    "multipart": true
-])
 #inline("Admin/Form")
 
 
