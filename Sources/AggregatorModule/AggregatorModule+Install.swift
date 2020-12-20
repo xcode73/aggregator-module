@@ -55,13 +55,21 @@ extension AggregatorModule {
     }
     
     func userPermissionInstallHook(args: HookArguments) -> [[String: Any]] {
+        AggregatorModule.permissions + 
+        AggregatorFeedModel.permissions +
         [
             [
-                "key": "aggregator",
-                "name": "Aggregator module"
+                "module": Self.name.lowercased(),
+                "context": "feed.items",
+                "action": "list",
+                "name": "List feed items",
             ],
-        ] +
-        AggregatorFeedModel.permissions +
-        AggregatorFeedItemModel.permissions
+            [
+                "module": Self.name.lowercased(),
+                "context": "feed.items",
+                "action": "update",
+                "name": "Update feed items",
+            ],
+        ]
     }
 }

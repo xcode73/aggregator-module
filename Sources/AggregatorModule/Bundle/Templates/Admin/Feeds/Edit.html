@@ -12,10 +12,11 @@
 ])
 
 #define(toolbarRightBefore):
-    #if(modelId != nil):
+    #if((modelId != nil) && UserHasPermission("aggregator.feed.items.list")):
     <a href="/admin/aggregator/feeds/#(modelId)/items/">#svg("rss")</a>
     #endif
 #enddefine
+
 #define(fields):
     #var(field = nil)
 

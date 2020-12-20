@@ -13,18 +13,19 @@ struct AggregatorFeedItemAdminController: ListViewController {
     typealias Module = AggregatorModule
     typealias Model = AggregatorFeedItemModel
 
-    var listView: String = "Aggregator/Admin/Items/List"
+    var listView: String = "Aggregator/Admin/Feed_Items/List"
 
     var idParamKey: String { "itemId" }
     var idPathComponent: PathComponent { .init(stringLiteral: ":" + idParamKey) }
     
-    func searchList(using qb: QueryBuilder<Model>, for searchTerm: String) {
-        qb.filter(\.$title ~~ searchTerm)
-    }
     
-    func beforeList(req: Request, queryBuilder: QueryBuilder<Model>) throws -> QueryBuilder<Model> {
+    func listQuery(search: String, queryBuilder: QueryBuilder<Model>, req: Request) {
+        queryBuilder.filter(\.$title ~~ search)
+    }
+
+    func beforeListQuery(req: Request, queryBuilder: QueryBuilder<Model>) -> QueryBuilder<Model> {
         guard let feedId = req.parameters.get("id"), let uuid = UUID(uuidString: feedId) else {
-            throw Abort(.badRequest)
+            return queryBuilder
         }
         return queryBuilder
             .filter(\.$feed.$id == uuid)

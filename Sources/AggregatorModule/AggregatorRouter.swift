@@ -22,7 +22,7 @@ struct AggregatorRouter: ViperRouter {
         let itemPath = modulePath.grouped([
             AggregatorFeedModel.pathComponent,
             feedAdmin.idPathComponent,
-            AggregatorFeedItemModel.pathComponent,
+            "items",
         ])
 
         itemPath.get(use: itemAdmin.listView)
