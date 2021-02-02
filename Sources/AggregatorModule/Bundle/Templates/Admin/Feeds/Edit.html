@@ -8,14 +8,13 @@
     "list": [
         "title": "Feeds",
         "url": "/admin/aggregator/feeds/"
-    ]
+    ],
+    "nav": []
 ])
 
-#define(toolbarRightBefore):
-    #if((modelId != nil) && UserHasPermission("aggregator.feed.items.list")):
-    <a href="/admin/aggregator/feeds/#(modelId)/items/">#svg("rss")</a>
-    #endif
-#enddefine
+#if((modelId != nil) && UserHasPermission("aggregator.feed.items.list")):
+    #(form.nav.append(["label": "Feed items", "link": "/admin/aggregator/feeds/" + modelId + "/items"]))
+#endif
 
 #define(fields):
     #var(field = nil)

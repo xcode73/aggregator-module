@@ -1,8 +1,12 @@
 #let(table = [
     "title": "Feed items",
     "key": "aggregator.feed.items",
-    "create": false
+    "create": false,
+    "nav": [
+        ["label": "Feed", "link": $req.url.path.trimLast()]
+    ]
 ])
+
 
 #var(columns = "1fr 200px")
 #var(actions = 0)
@@ -23,10 +27,6 @@ tr {
 }
 #enddefine
 
-#define(toolbarRight):
-    <a href="#($req.url.path.trimLast())">#svg("rss")</a>
-#enddefine
-
 #define(breadcrumb):
     <li><a href="#($req.url.path.trimLast(2))">Feeds</a></li>
 #enddefine
@@ -34,29 +34,26 @@ tr {
 
 #define(th):
     #var(link = nil)
-    <th class="td:left m:h:s td:compact:hidden">URL</th>
-    <th class="td:center td:compact:hidden">Date</th>
-
+    <th class="compact-hidden">URL</th>
+    <th class="text-align-center compact-hidden">Date</th>
     #if(UserHasPermission(table.key + ".update")):
-    <th class="td:center td:compact:hidden">Visibility</th>
+    <th class="text-align-center compact-hidden">Visibility</th>
     #endif
-
 #enddefine
 
 #define(tr):
     #for(item in list.items):
-    <tr>
-        
-        <td class="td:left m:h:s">
+    <tr class="compact-margin">
+        <td class="margin-horizontal-xs compact-center compact-separator compact-margin">
             <a href="#(item.url)" target="_blank">#(item.title)</a>
         </td>
 
-        <td class="td:center td:compact:separator">
+        <td class="text-align-center compact-separator compact-margin">
             #Date(timeStamp: item.date, fixedFormat: $app.dateFormats.date, timeZone: $app.timezone)
         </td>
 
         #if(UserHasPermission(table.key + ".update")):
-        <td class="td:center">
+        <td class="text-align-center compact-margin">
             <a id="#(item.id)" href="#($req.url.path)#(item.id)/toggle/">
                 #if(item.visibility == "visible"):#svg("eye")#else:#svg("eye-off")#endif
             </a>
