@@ -33,8 +33,8 @@ final class AggregatorModule: ViperModule {
         app.hooks.register("frontend-page-install", use: frontendPageInstallHook)
 
         /// admin
-        app.hooks.register("admin", use: (router as! AggregatorRouter).adminRoutesHook)
-        app.hooks.register("leaf-admin-menu", use: leafAdminMenuHook)
+        app.hooks.register("admin-routes", use: (router as! AggregatorRouter).adminRoutesHook)
+        app.hooks.register("template-admin-menu", use: templateAdminMenuHook)
         
         /// frontend
         app.hooks.register("aggregator-page", use: aggregatorPageHook)        
@@ -45,11 +45,11 @@ final class AggregatorModule: ViperModule {
 
   
     
-    func leafAdminMenuHook(args: HookArguments) -> LeafDataRepresentable {
+    func templateAdminMenuHook(args: HookArguments) -> TemplateDataRepresentable {
         [
             "name": "Aggregator",
             "icon": "rss",
-            "items": LeafData.array([
+            "items": TemplateData.array([
                 [
                     "url": "/admin/aggregator/feeds/",
                     "label": "Feeds",
@@ -86,21 +86,21 @@ final class AggregatorModule: ViperModule {
                 }
                 return groups
             }
-            /// transform groups into leaf data
-            .map { groups -> [LeafData] in
-                groups.keys.sorted().reversed().map { key -> LeafData in
+            /// transform groups into template data
+            .map { groups -> [TemplateData] in
+                groups.keys.sorted().reversed().map { key -> TemplateData in
                     let group = groups[key]!
                     return .dictionary([
                         "day": .double(formatter.date(from: key)?.timeIntervalSinceReferenceDate),
-                        "items": .array(group.map(\.leafData))
+                        "items": .array(group.map(\.templateData))
                     ])
                 }
             }
             /// render list
             .flatMap { groups in
-                req.leaf.render(template: "Aggregator/Frontend/List", context: [
+                req.tau.render(template: "Aggregator/Frontend/List", context: [
                     "groups": .array(groups),
-                    "metadata": metadata.leafData
+                    "metadata": metadata.templateData
                 ])
             }
             .encodeOptionalResponse(for: req)

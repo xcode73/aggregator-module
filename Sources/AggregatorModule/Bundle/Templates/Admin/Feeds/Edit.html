@@ -20,13 +20,13 @@
     #var(field = nil)
 
     #(field = ["id": "image", "class": "circular", "data": fields.image, "required": true, "accept": "image/jpeg"])
-    #inline("Admin/Fields/File")
+    #inline("Common/Fields/File")
 
     #(field = ["id": "title", "required": true, "data": fields.title])
-    #inline("Admin/Fields/Text")
+    #inline("Common/Fields/Text")
     
     #(field = ["id": "url", "required": true, "data": fields.url])
-    #inline("Admin/Fields/Text")
+    #inline("Common/Fields/Text")
 
 #enddefine
 

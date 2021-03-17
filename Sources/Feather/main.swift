@@ -6,9 +6,8 @@
 //
 
 import FeatherCore
-import FluentSQLiteDriver
-import LiquidLocalDriver
 
+import CommonModule
 import SystemModule
 import UserModule
 import ApiModule
@@ -17,8 +16,6 @@ import FrontendModule
 
 import AggregatorModule
 
-
-/// setup metadata delegate object
 Feather.metadataDelegate = FrontendMetadataDelegate()
 
 var env = try Environment.detect()
@@ -29,10 +26,9 @@ defer { feather.stop() }
 feather.useSQLiteDatabase()
 feather.useLocalFileStorage()
 feather.usePublicFileMiddleware()
-feather.setMaxUploadSize("10mb")
 
 try feather.configure([
-    /// core
+    CommonBuilder(),
     SystemBuilder(),
     UserBuilder(),
     ApiBuilder(),
@@ -42,10 +38,8 @@ try feather.configure([
     AggregatorBuilder()
 ])
 
-
-/// reset resources folder if we're in debug mode
 if feather.app.isDebug {
-    try feather.reset(resourcesOnly: true)
+    try feather.resetPublicFiles()
 }
 
 try feather.start()

@@ -7,9 +7,9 @@
 
 import FeatherCore
 
-extension AggregatorFeedItemModel: LeafDataRepresentable {
+extension AggregatorFeedItemModel: TemplateDataRepresentable {
 
-    var leafData: LeafData {
+    var templateData: TemplateData {
         .dictionary([
             "id": id,
             "title": title,
