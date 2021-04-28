@@ -7,10 +7,11 @@
 
 import FeatherCore
 
-final class AggregatorFeedModel: ViperModel {
+final class AggregatorFeedModel: FeatherModel {
     typealias Module = AggregatorModule
 
-    static let name = "feeds"
+    static let modelKey: String = "feeds"
+    static let name: FeatherModelName = "Feed"
 
     struct FieldKeys {
         static var imageKey: FieldKey { "image_key" }

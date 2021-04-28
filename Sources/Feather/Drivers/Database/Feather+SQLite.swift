@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Tibor Bodecs on 2021. 01. 29..
 //
@@ -11,7 +11,7 @@ import FluentSQLiteDriver
 extension Feather {
 
     /// use the sqlite database driver
-    func useSQLiteDatabase() {
-        use(database: .sqlite(.file("db.sqlite")), databaseId: .sqlite)
+    static func useSQLiteDatabase(_ app: Application) {
+        app.databases.use(.sqlite(.file("Resources/db.sqlite")), as: .sqlite)
     }
 }

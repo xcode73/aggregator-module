@@ -1,15 +1,13 @@
 #let(head = [
-    "title": $system.variables["aggregator.page.title"],
-    "description": $system.variables["aggregator.page.description"],
-    "css": metadata.css,
-    "js": metadata.js
+    "title": $variables.aggregatorFeedPageTitle,
+    "excerpt": $variables.aggregatorFeedPageExcerpt
 ])
 #define(body):
 <div id="feed-items" class="container">
     
     <header class="lead">
         <h1>#(head.title)</h1>
-        <p>#(head.description)</p>
+        <p>#(head.excerpt)</p>
     </header>
 
     <section>

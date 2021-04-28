@@ -9,9 +9,9 @@ import FeatherCore
 
 extension AggregatorModule {
 
-    func modelInstallHook(args: HookArguments) -> EventLoopFuture<Void> {
-        let req = args["req"] as! Request
-        
+    func installModelsHook(args: HookArguments) -> EventLoopFuture<Void> {
+        let req = args.req
+
         return [
             AggregatorFeedModel(imageKey: "aggregator/feeds/swift-logo.jpg",
                                 title: "swift.org",
@@ -19,57 +19,38 @@ extension AggregatorModule {
         ].create(on: req.db)
     }
 
-    func frontendMainMenuInstallHook(args: HookArguments) -> [[String:Any]] {
-        [
-            [
-                "label": "Aggregator",
-                "url": "/aggregator/",
-            ],
-        ]
-    }
-
-    func frontendPageInstallHook(args: HookArguments) -> [[String:Any]] {
-        [
-            [
-                "title": "Aggregator",
-                "content": "[aggregator-page]",
-            ],
-        ]
-    }
-        
-    func systemVariablesInstallHook(args: HookArguments) -> [[String: Any]] {
-        [
-            [
-                "key": "aggregator.page.title",
-                "name": "Aggregator page title",
-                "value": "Aggregator page title",
-                "note": "Title of the aggregator page",
-            ],
-            [
-                "key": "aggregator.page.description",
-                "name": "Aggregator page description",
-                "value": "Aggregator page description",
-                "note": "Description of the aggregator page",
-            ],
+    func installMainMenuItemsHook(args: HookArguments) -> [MenuItemCreateObject] {
+        let menuId = args["menuId"] as! UUID
+        return [
+            .init(label: "Aggregator", url: "/aggregator/", priority: 900, menuId: menuId),
         ]
     }
     
-    func userPermissionInstallHook(args: HookArguments) -> [[String: Any]] {
-        AggregatorModule.permissions + 
-        AggregatorFeedModel.permissions +
+    func installPagesHook(args: HookArguments) -> [PageCreateObject] {
         [
-            [
-                "module": Self.name.lowercased(),
-                "context": "feed.items",
-                "action": "list",
-                "name": "List feed items",
-            ],
-            [
-                "module": Self.name.lowercased(),
-                "context": "feed.items",
-                "action": "update",
-                "name": "Update feed items",
-            ],
+            .init(title: "Aggregator", content: "[aggregator-feed-page]"),
         ]
+    }
+            
+    func installVariablesHook(args: HookArguments) -> [VariableCreateObject] {
+        [
+            .init(key: "aggregatorFeedPageTitle",
+                  name: "Aggregator feed page title",
+                  value: "Aggregated news",
+                  notes: "Title of the aggregator page"),
+            
+            .init(key: "aggregatorFeedPageExcerpt",
+                  name: "Aggregator feed page description",
+                  value: "The latest items of various feeds",
+                  notes: "Description of the aggregator page"),
+        ]
+    }
+    
+    func installPermissionsHook(args: HookArguments) -> [PermissionCreateObject] {
+        var permissions: [PermissionCreateObject] = [
+            Self.hookInstallPermission(for: .custom("admin"))
+        ]
+        permissions += AggregatorFeedModel.hookInstallPermissions()
+        return permissions
     }
 }

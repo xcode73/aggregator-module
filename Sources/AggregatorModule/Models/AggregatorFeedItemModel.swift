@@ -7,11 +7,13 @@
 
 import FeatherCore
 
-final class AggregatorFeedItemModel: ViperModel {
+final class AggregatorFeedItemModel: FeatherModel {
     typealias Module = AggregatorModule
 
-    static let name = "feed_items"
-    
+    static let modelKey = "items"
+    static let name: FeatherModelName = "Feed item"
+    static let schema = "\(Module.moduleKey)_feed_\(modelKey)"
+
     struct FieldKeys {
         static var title: FieldKey { "title" }
         static var url: FieldKey { "url" }

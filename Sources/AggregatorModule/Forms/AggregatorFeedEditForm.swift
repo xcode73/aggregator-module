@@ -7,44 +7,36 @@
 
 import FeatherCore
 
-final class AggregatorFeedEditForm: ModelForm {
+struct AggregatorFeedEditForm: FeatherForm {
 
-    typealias Model = AggregatorFeedModel
-
-    var modelId: UUID?
-    var title = FormField<String>(key: "title").required().length(max: 250)
-    var url = FormField<String>(key: "url").required().length(max: 250)
-    var image = FileFormField(key: "image").required()
-    var notification: String?
+    var context: FeatherFormContext<AggregatorFeedModel>
     
-    var fields: [FormFieldRepresentable] {
-        [title, url, image]
+    init() {
+        context = .init()
+        context.form.fields = createFormFields()
     }
 
-    init() { }
-
-    func processAfterFields(req: Request) -> EventLoopFuture<Void> {
-        image.uploadTemporaryFile(req: req)
+    private func createFormFields() -> [FormComponent] {
+        [
+            ImageField(key: "image", path: Model.assetPath)
+                .read { ($1 as! ImageField).imageKey = context.model?.imageKey }
+                .write { context.model?.imageKey = ($1 as! ImageField).imageKey ?? "" },
+            
+            TextField(key: "title")
+                .config { $0.output.required = true }
+                .validators { [
+                    FormFieldValidator($1, "Title is required") { !$0.input.isEmpty },
+                ] }
+                .read { $1.output.value = context.model?.title }
+                .write { context.model?.title = $1.input },
+            
+            TextField(key: "url")
+                .config { $0.output.required = true }
+                .validators { [
+                    FormFieldValidator($1, "URL is required") { !$0.input.isEmpty },
+                ] }
+                .read { $1.output.value = context.model?.url }
+                .write { context.model?.url = $1.input },
+        ]
     }
-
-    func read(from input: Model)  {
-        modelId = input.id
-        title.value = input.title
-        url.value = input.url
-        image.value.originalKey = input.imageKey
-    }
-
-    func write(to output: Model) {
-        output.title = title.value!
-        output.url = url.value!
-    }
-    
-    func willSave(req: Request, model: Model) -> EventLoopFuture<Void> {
-        image.save(to: Model.path, req: req).map {
-            if let key = $0 {
-                model.imageKey = key
-            }
-        }
-    }
-
 }

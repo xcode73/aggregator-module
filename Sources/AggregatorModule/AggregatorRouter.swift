@@ -5,27 +5,30 @@
 //  Created by Tibor Bodecs on 2020. 01. 18..
 //
 
-import Vapor
-import ViperKit
+import FeatherCore
 
-struct AggregatorRouter: ViperRouter {
+struct AggregatorRouter: RouteCollection {
+    
+    func boot(routes: RoutesBuilder) throws {
+    
+    }
 
-    let feedAdmin = AggregatorFeedAdminController()
-    let itemAdmin = AggregatorFeedItemAdminController()
+//    let feedAdmin = AggregatorFeedAdminController()
+//    let itemAdmin = AggregatorFeedItemAdminController()
 
     func adminRoutesHook(args: HookArguments) {
-        let routes = args["routes"] as! RoutesBuilder
+        let routes = args.routes
         
-        let modulePath = routes.grouped(AggregatorModule.pathComponent)
-        feedAdmin.setupRoutes(on: modulePath, as: AggregatorFeedModel.pathComponent)
-
-        let itemPath = modulePath.grouped([
-            AggregatorFeedModel.pathComponent,
-            feedAdmin.idPathComponent,
-            "items",
-        ])
-
-        itemPath.get(use: itemAdmin.listView)
-        itemPath.get(itemAdmin.idPathComponent, "toggle", use: itemAdmin.toggle)
+//        let modulePath = routes.grouped(AggregatorModule.pathComponent)
+//        feedAdmin.setupRoutes(on: modulePath, as: AggregatorFeedModel.pathComponent)
+//
+//        let itemPath = modulePath.grouped([
+//            AggregatorFeedModel.pathComponent,
+//            feedAdmin.idPathComponent,
+//            "items",
+//        ])
+//
+//        itemPath.get(use: itemAdmin.listView)
+//        itemPath.get(itemAdmin.idPathComponent, "toggle", use: itemAdmin.toggle)
     }
 }

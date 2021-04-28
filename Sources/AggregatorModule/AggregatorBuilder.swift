@@ -11,9 +11,9 @@ public func createAggregatorModule() -> UnsafeMutableRawPointer {
     return Unmanaged.passRetained(AggregatorBuilder()).toOpaque()
 }
 
-public final class AggregatorBuilder: ViperBuilder {
+public final class AggregatorBuilder: FeatherModuleBuilder {
 
-    public override func build() -> ViperModule {
+    public override func build() -> FeatherModule {
         AggregatorModule()
     }
 }
