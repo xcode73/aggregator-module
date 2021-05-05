@@ -29,6 +29,8 @@ final class AggregatorModule: FeatherModule {
         /// admin
         let router = AggregatorRouter()
         app.hooks.register(.adminRoutes, use: router.adminRoutesHook)
+        app.hooks.register(.apiRoutes, use: router.apiRoutesHook)
+        app.hooks.register(.apiAdminRoutes, use: router.apiAdminRoutesHook)
         app.hooks.register(.adminMenu, use: adminMenuHook)
         
         /// frontend

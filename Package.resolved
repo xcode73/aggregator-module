@@ -33,7 +33,7 @@
         "repositoryURL": "https://github.com/feathercms/feather-core",
         "state": {
           "branch": "main",
-          "revision": "62db07bc36c676f1e2add17cf01d2af26c880143",
+          "revision": "ba262b2d8c25ed2dbb2157f4855df564eedd0761",
           "version": null
         }
       },
@@ -125,6 +125,15 @@
           "branch": null,
           "revision": "dab93b6b90caa6501a2d30f81bad8052c18d97fb",
           "version": "4.2.1"
+        }
+      },
+      {
+        "package": "spec",
+        "repositoryURL": "https://github.com/binarybirds/spec.git",
+        "state": {
+          "branch": null,
+          "revision": "aecab17649ac83133daa98e54620911773227946",
+          "version": "1.2.2"
         }
       },
       {
@@ -240,8 +249,8 @@
         "repositoryURL": "https://github.com/binarybirds/tau",
         "state": {
           "branch": null,
-          "revision": "935292e605b815833629ba31a82480a7c8b23217",
-          "version": "1.0.0"
+          "revision": "cd351776d6e7c6877f742e6f29d5707b442bcb1c",
+          "version": "1.0.1"
         }
       },
       {
@@ -249,8 +258,8 @@
         "repositoryURL": "https://github.com/binarybirds/tau-kit",
         "state": {
           "branch": null,
-          "revision": "7420424ab77aa8f876356df56223336be26927be",
-          "version": "1.1.2"
+          "revision": "c1b38ed81b235188276977b674ffe9c9532edb86",
+          "version": "1.1.4"
         }
       },
       {
@@ -258,8 +267,8 @@
         "repositoryURL": "https://github.com/vapor/vapor",
         "state": {
           "branch": null,
-          "revision": "338c4be2362cac6a465bcda2ef73a189d06b18a6",
-          "version": "4.44.2"
+          "revision": "07a105b295a0b191e69761feede58edb2ebeb580",
+          "version": "4.45.0"
         }
       },
       {

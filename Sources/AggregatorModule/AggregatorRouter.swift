@@ -8,16 +8,20 @@
 import FeatherCore
 
 struct AggregatorRouter: RouteCollection {
+
+    let feedController = AggregatorFeedAdminController()
+//    let itemAdmin = AggregatorFeedItemAdminController()
     
     func boot(routes: RoutesBuilder) throws {
-    
+        
     }
-
-//    let feedAdmin = AggregatorFeedAdminController()
-//    let itemAdmin = AggregatorFeedItemAdminController()
-
+        
     func adminRoutesHook(args: HookArguments) {
-        let routes = args.routes
+        let adminRoutes = args.routes
+        
+        adminRoutes.get("aggregator", use: SystemAdminMenuController(key: "aggregator").moduleView)
+
+        adminRoutes.register(feedController)
         
 //        let modulePath = routes.grouped(AggregatorModule.pathComponent)
 //        feedAdmin.setupRoutes(on: modulePath, as: AggregatorFeedModel.pathComponent)
@@ -30,5 +34,16 @@ struct AggregatorRouter: RouteCollection {
 //
 //        itemPath.get(use: itemAdmin.listView)
 //        itemPath.get(itemAdmin.idPathComponent, "toggle", use: itemAdmin.toggle)
+
+    }
+    
+    func apiRoutesHook(args: HookArguments) {
+//        let publicApiRoutes = args.routes
+    }
+    
+    func apiAdminRoutesHook(args: HookArguments) {
+        let apiRoutes = args.routes
+
+        apiRoutes.registerApi(feedController)
     }
 }

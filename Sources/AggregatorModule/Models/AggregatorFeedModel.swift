@@ -5,6 +5,7 @@
 //  Created by Tibor Bodecs on 2020. 01. 26..
 //
 
+import Fluent
 import FeatherCore
 
 final class AggregatorFeedModel: FeatherModel {
@@ -38,5 +39,21 @@ final class AggregatorFeedModel: FeatherModel {
         self.imageKey = imageKey
         self.title = title 
         self.url = url
+    }
+    
+    // MARK: - query
+
+    static func allowedOrders() -> [FieldKey] {
+        [
+            FieldKeys.title,
+            FieldKeys.url,
+        ]
+    }
+    
+    static func search(_ term: String) -> [ModelValueFilter<AggregatorFeedModel>] {
+        [
+            \.$title ~~ term,
+            \.$url ~~ term,
+        ]
     }
 }

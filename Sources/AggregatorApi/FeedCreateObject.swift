@@ -9,12 +9,12 @@ import Foundation
 
 public struct FeedCreateObject: Codable {
 
-    public var imageKey: String?
+    public var imageKey: String
     public var title: String
     public var url: String
     
     
-    public init(imageKey: String?,
+    public init(imageKey: String,
                 title: String,
                 url: String)
     {

@@ -10,13 +10,13 @@ import Foundation
 public struct FeedListObject: Codable {
 
     public var id: UUID
-    public var imageKey: String?
+    public var imageKey: String
     public var title: String
     public var url: String
     
     
     public init(id: UUID,
-                imageKey: String?,
+                imageKey: String,
                 title: String,
                 url: String)
     {

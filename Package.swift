@@ -9,12 +9,12 @@ var deps: [Package.Dependency] = [
 ]
 
 var targets: [Target] = [
-    .target(name: "AggregatorModuleApi"),
+    .target(name: "AggregatorApi"),
     .target(name: "AggregatorModule", dependencies: [
         .product(name: "FeatherCore", package: "feather-core"),
         .product(name: "Kanna", package: "Kanna"),
 
-        .target(name: "AggregatorModuleApi"),
+        .target(name: "AggregatorApi"),
     ],
     resources: [
         .copy("Bundle"),
@@ -35,6 +35,7 @@ if isLocalTestMode {
         ]),
         .testTarget(name: "AggregatorModuleTests", dependencies: [
             .target(name: "AggregatorModule"),
+            .product(name: "FeatherTest", package: "feather-core")
         ])
     ])
 }
