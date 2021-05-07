@@ -7,15 +7,12 @@
 
 import FeatherCore
 
-struct AggregatorRouter: RouteCollection {
+struct AggregatorRouter: FeatherRouter {
 
     let feedController = AggregatorFeedAdminController()
 //    let itemAdmin = AggregatorFeedItemAdminController()
     
-    func boot(routes: RoutesBuilder) throws {
-        
-    }
-        
+    
     func adminRoutesHook(args: HookArguments) {
         let adminRoutes = args.routes
         
@@ -35,10 +32,6 @@ struct AggregatorRouter: RouteCollection {
 //        itemPath.get(use: itemAdmin.listView)
 //        itemPath.get(itemAdmin.idPathComponent, "toggle", use: itemAdmin.toggle)
 
-    }
-    
-    func apiRoutesHook(args: HookArguments) {
-//        let publicApiRoutes = args.routes
     }
     
     func apiAdminRoutesHook(args: HookArguments) {

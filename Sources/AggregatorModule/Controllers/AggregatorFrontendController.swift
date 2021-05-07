@@ -7,7 +7,7 @@
 
 import FeatherCore
 
-struct AggregatorWebController {
+struct AggregatorFrontendController {
     
     /// renders the [aggregator-feed-page] content
     func aggregatorFeedPageHook(args: HookArguments) -> EventLoopFuture<Response?> {

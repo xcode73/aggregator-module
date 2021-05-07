@@ -7,7 +7,7 @@
 
 import FeatherCore
 
-struct AggregatorMigration_v1_0_0: Migration {
+struct AggregatorMigration_v1: Migration {
     
     func prepare(on db: Database) -> EventLoopFuture<Void> {
         db.eventLoop.flatten([
