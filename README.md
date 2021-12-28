@@ -1,6 +1,6 @@
 # Feed aggregator module for Feather CMS
 
-This module is reponsible for providing basic RSS / Atom feed aggregation for [Feather CMS](https://github.com/binarybirds/feather/).
+This module is reponsible for providing basic RSS / Atom feed aggregation for [Feather CMS](https://github.com/feathercms/feather/).
 
 
 ## Credits

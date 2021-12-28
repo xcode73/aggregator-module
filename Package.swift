@@ -15,7 +15,9 @@ let package = Package(
         .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.3"),
     ],
     targets: [
-        .target(name: "AggregatorApi"),
+        .target(name: "AggregatorApi", dependencies: [
+            .product(name: "FeatherCoreApi", package: "feather-core"),
+        ]),
         .target(name: "AggregatorModule", dependencies: [
             .product(name: "FeatherCore", package: "feather-core"),
             .product(name: "Kanna", package: "Kanna"),
