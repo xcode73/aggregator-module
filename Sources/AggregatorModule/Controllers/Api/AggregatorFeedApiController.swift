@@ -12,13 +12,14 @@ extension Aggregator.Feed.Detail: Content {}
 struct AggregatorFeedApiController: ApiController {
     typealias ApiModel = Aggregator.Feed
     typealias DatabaseModel = AggregatorFeedModel
-        
-    
-    func listOutput(_ req: Request, _ model: DatabaseModel) async throws -> Aggregator.Feed.List {
-        .init(id: model.uuid,
-              imageKey: model.imageKey,
-              title: model.title,
-              url: model.url)
+
+    func listOutput(_ req: Request, _ models: [DatabaseModel]) async throws -> [Aggregator.Feed.List] {
+        models.map { model in
+            .init(id: model.uuid,
+                  imageKey: model.imageKey,
+                  title: model.title,
+                  url: model.url)
+        }
     }
     
     func detailOutput(_ req: Request, _ model: DatabaseModel) async throws -> Aggregator.Feed.Detail {

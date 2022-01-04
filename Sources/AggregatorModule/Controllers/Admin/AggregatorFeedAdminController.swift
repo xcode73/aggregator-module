@@ -49,7 +49,7 @@ struct AggregatorFeedAdminController: AdminController {
         ]
     }
     
-    func beforeDelete(_ req: Request, model: DatabaseModel) async throws {
+    func beforeDelete(_ req: Request, _ model: DatabaseModel) async throws {
         try await model.$items.query(on: req.db).delete()
     }
     
