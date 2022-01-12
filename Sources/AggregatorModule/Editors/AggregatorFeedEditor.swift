@@ -7,15 +7,15 @@
 
 struct AggregatorFeedEditor: FeatherModelEditor {
     let model: AggregatorFeedModel
-    let form: FeatherForm
+    let form: AbstractForm
 
-    init(model: AggregatorFeedModel, form: FeatherForm) {
+    init(model: AggregatorFeedModel, form: AbstractForm) {
         self.model = model
         self.form = form
     }
 
-    @FormComponentBuilder
-    var formFields: [FormComponent] {
+    @FormFieldBuilder
+    var formFields: [FormField] {
         // @TODO: use path variable
         ImageField("image", path: "aggregator/feed")
             .read {
