@@ -12,7 +12,7 @@ struct AggregatorRouter: FeatherRouter {
     
     
     func adminRoutesHook(args: HookArguments) {
-        feedAdminController.setupRoutes(args.routes)
+        feedAdminController.setUpRoutes(args.routes)
 
         args.routes.get("aggregator") { req -> Response in
             let template = AdminModulePageTemplate(.init(title: "Aggregator", message: "module information", links: [
@@ -23,6 +23,6 @@ struct AggregatorRouter: FeatherRouter {
     }
     
     func apiRoutesHook(args: HookArguments) {
-        feedApiController.setupRoutes(args.routes)
+        feedApiController.setUpRoutes(args.routes)
     }
 }
