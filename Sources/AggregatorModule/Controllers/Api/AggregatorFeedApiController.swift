@@ -51,7 +51,7 @@ struct AggregatorFeedApiController: ApiController {
         [
             KeyedContentValidator<String>.required("title", optional: optional),
             KeyedContentValidator<String>.required("url", optional: optional),
-            KeyedContentValidator<String>("url", "Url must be unique", optional: optional) { value, req in
+            KeyedContentValidator<String>("url", "Url must be unique", optional: optional) { req, value in
                 try await DatabaseModel.isUnique(req, \.$url == value, Aggregator.Feed.getIdParameter(req))
             }
         ]
