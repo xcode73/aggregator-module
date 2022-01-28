@@ -15,7 +15,7 @@ struct AggregatorFeedEditor: FeatherModelEditor {
     }
 
     @FormFieldBuilder
-    var formFields: [FormField] {
+    func createFields(_ req: Request) -> [FormField] {
         // @TODO: use path variable
         ImageField("image", path: "aggregator/feed")
             .read {
