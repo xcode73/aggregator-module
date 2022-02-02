@@ -27,10 +27,10 @@ struct AggregatorModule: FeatherModule {
         app.hooks.registerAsync("aggregator-feed-page", use: aggregatorFeedPageHook)
     }
     
-    func adminWidgetsHook(args: HookArguments) -> [TemplateRepresentable] {
+    func adminWidgetsHook(args: HookArguments) -> [OrderedHookResult<TemplateRepresentable>] {
         if args.req.checkPermission(Aggregator.permission(for: .detail)) {
             return [
-                AggregatorAdminWidgetTemplate(),
+                .init(AggregatorAdminWidgetTemplate(), order: 300),
             ]
         }
         return []
