@@ -21,6 +21,9 @@ struct AggregatorModule: FeatherModule {
         app.hooks.register(.apiRoutes, use: router.apiRoutesHook)
         app.hooks.register(.adminWidgets, use: adminWidgetsHook)
         
+        app.hooks.register(.installWebMenuItems, use: installWebMenuItemsHook)
+        app.hooks.register(.installWebPages, use: installWebPagesHook)
+        
         app.hooks.registerAsync("aggregator-feed-page", use: aggregatorFeedPageHook)
     }
     
@@ -66,6 +69,19 @@ struct AggregatorModule: FeatherModule {
         }
                 
         return req.templates.renderHtml(AggregatorFeedPageTemplate(.init(metadata: metadata, groups: c)))
+    }
+    
+    func installWebMenuItemsHook(args: HookArguments) -> [Web.MenuItem.Create] {
+        let menuId = args["menuId"] as! UUID
+        return [
+            .init(label: "Feeds", url: "/feeds/", priority: 500, menuId: menuId),
+        ]
+    }
+    
+    func installWebPagesHook(args: HookArguments) -> [Web.Page.Create] {
+        [
+            .init(title: "Feeds", content: "[aggregator-feed-page]"),
+        ]
     }
 }
 
