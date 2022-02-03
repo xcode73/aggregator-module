@@ -6,6 +6,7 @@
 //
 
 import SwiftHtml
+import FeatherCore
 
 struct AggregatorFeedPageTemplate: TemplateRepresentable {
     
@@ -17,13 +18,9 @@ struct AggregatorFeedPageTemplate: TemplateRepresentable {
     
     @TagBuilder
     func render(_ req: Request) -> Tag {
-        WebIndexTemplate(.init(title: "items")) {
+        WebIndexTemplate(.init(title: "Feed items")) {
             Div {
-                Header {
-                    H1("Feed items")
-                    P("Latest news from all around the world.")
-                }
-                .class("lead")
+                LeadTemplate(.init(title: "Feed items", excerpt: "Latest news from all around the world.")).render(req)
 
                 Section {
                     for group in context.groups {
