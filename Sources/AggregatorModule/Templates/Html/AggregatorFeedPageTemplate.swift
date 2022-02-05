@@ -19,8 +19,8 @@ struct AggregatorFeedPageTemplate: TemplateRepresentable {
     @TagBuilder
     func render(_ req: Request) -> Tag {
         WebIndexTemplate(.init(title: "Feed items")) {
-            Div {
-                Div {
+            Wrapper {
+                Container {
                     LeadTemplate(.init(title: "Feed items", excerpt: "Latest news from all around the world.")).render(req)
                     
                     Section {
@@ -54,10 +54,8 @@ struct AggregatorFeedPageTemplate: TemplateRepresentable {
                         }
                     }
                 }
-                .class("container")
             }
             .id("feed-items")
-            .class("wrapper")
         }
         .render(req)
     }
