@@ -18,7 +18,7 @@ struct AggregatorAdminWidgetTemplate: TemplateRepresentable {
             if req.checkPermission(Aggregator.Feed.permission(for: .list)) {
                 Li {
                     A("Feeds")
-                        .href("aggregator/feeds/")
+                        .href("/admin/aggregator/feeds/")
                 }
             }
         }

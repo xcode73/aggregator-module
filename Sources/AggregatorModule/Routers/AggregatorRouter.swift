@@ -14,12 +14,9 @@ struct AggregatorRouter: FeatherRouter {
     func adminRoutesHook(args: HookArguments) {
         feedAdminController.setUpRoutes(args.routes)
 
-        args.routes.get("aggregator") { req -> Response in
+        args.routes.get(Aggregator.pathKey.pathComponent) { req -> Response in
             let template = AdminModulePageTemplate(.init(title: "Aggregator",
-                                                         message: "module information",
-                                                         navigation: [
-                                                            .init(label: "Feeds", path: "/admin/aggregator/feeds/"),
-                                                         ]))
+                                                         tag: AggregatorAdminWidgetTemplate().render(req)))
             return req.templates.renderHtml(template)
         }
     }
