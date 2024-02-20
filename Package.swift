@@ -11,7 +11,7 @@ let package = Package(
         .library(name: "AggregatorApi", targets: ["AggregatorApi"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/feathercms/feather-core", .branch("dev")),
+        .package(url: "https://github.com/xcode73/feather-core", .branch("test-dev")),
         .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.3"),
     ],
     targets: [
@@ -19,7 +19,7 @@ let package = Package(
             .product(name: "FeatherCoreApi", package: "feather-core"),
         ]),
         .target(name: "AggregatorModule", dependencies: [
-            .product(name: "FeatherCore", package: "feather-core"),
+            .product(name: "Feather", package: "feather-core"),
             .product(name: "Kanna", package: "Kanna"),
 
             .target(name: "AggregatorApi"),
