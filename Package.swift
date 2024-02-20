@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "aggregator-module",
     platforms: [
-       .macOS(.v12)
+        .macOS(.v10_15),
     ],
     products: [
         .library(name: "AggregatorModule", targets: ["AggregatorModule"]),
