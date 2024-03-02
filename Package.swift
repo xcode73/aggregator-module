@@ -8,7 +8,7 @@ let package = Package(
     ],
     products: [
         .library(name: "AggregatorModule", targets: ["AggregatorModule"]),
-        .library(name: "AggregatorApi", targets: ["AggregatorApi"])
+//        .library(name: "AggregatorApi", targets: ["AggregatorApi"])
     ],
     dependencies: [
         .package(url: "https://github.com/xcode73/feather-core.git", branch: "test-dev"),
@@ -16,7 +16,7 @@ let package = Package(
     ],
     targets: [
         .target(name: "AggregatorApi", dependencies: [
-            .product(name: "FeatherCoreApi", package: "feather-core")
+//            .product(name: "FeatherCoreApi", package: "feather-core")
         ]),
         .target(name: "AggregatorModule", dependencies: [
             .product(name: "Feather", package: "feather-core"),
