@@ -11,9 +11,9 @@ let package = Package(
         .library(name: "AggregatorApi", targets: ["AggregatorApi"]),
     ],
     dependencies: [
-//        .package(url: "git@github.com:xcode73/feather-core.git", branch: "main"),
+//        .package(url: "https://github.com/xcode73/feather-core.git", branch: "main"),
         .package(path: "../feather-core"),
-        .package(url: "git@github.com:tid-kijyun/Kanna.git", from: "5.3.0"),
+        .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.3.0"),
     ],
     targets: [
         .target(name: "AggregatorApi"),
