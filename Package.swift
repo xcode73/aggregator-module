@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
@@ -11,8 +11,9 @@ let package = Package(
         .library(name: "AggregatorApi", targets: ["AggregatorApi"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/feathercms/feather-core", .branch("dev")),
-        .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.3"),
+//        .package(url: "git@github.com:xcode73/feather-core.git", branch: "main"),
+        .package(path: "../feather-core"),
+        .package(url: "git@github.com:tid-kijyun/Kanna.git", from: "5.3.0"),
     ],
     targets: [
         .target(name: "AggregatorApi"),
